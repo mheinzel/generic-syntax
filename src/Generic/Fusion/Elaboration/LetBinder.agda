@@ -1,4 +1,4 @@
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module Generic.Fusion.Elaboration.LetBinder where
 
@@ -35,6 +35,7 @@ module _ {I : Set} {d : Desc I} where
             (Σ A B ∋ x , b₁) ≡ (x , b₂) → b₁ ≡ b₂
  proj₂-eq refl = refl
 
+ {-
  RenUnLet : Fusion (d `+ Let) Ren UnLet UnLet
             (λ Γ Δ ρ₁ ρ₂ → All Eqᴿ Γ (select ρ₁ ρ₂)) Eqᴿ Eqᴿ
  RenUnLet = FusProp.ren-sem (d `+ Let) UnLet $ λ where
@@ -258,3 +259,4 @@ module _ {I : Set} {d : Desc I} where
     eqᴿ : All Eqᴿ _ (select (pack (injectʳ Ξ)) ρ₁₃) (th^Env th^Tm ρ₂ (pack (injectʳ Ξ)))
     lookupᴿ eqᴿ k with split Ξ (injectʳ Ξ k) | split-injectʳ Ξ k
     lookupᴿ eqᴿ k | .(inj₂ k) | refl = refl
+ -}

@@ -1,5 +1,5 @@
 \begin{code}
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module StateOfTheArt.ACMM where
 
@@ -215,7 +215,7 @@ sub = Semantics.semantics Substitution
 \begin{code}
 open import Category.Monad.State
 open import Category.Applicative
-open import Data.String hiding (show)
+open import Data.String hiding (show; head; tail)
 open import Data.Nat.Show
 open import Data.Product
 open import Relation.Binary.PropositionalEquality hiding ([_])

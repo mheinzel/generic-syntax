@@ -1,4 +1,4 @@
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 open import Data.Var hiding (z; s; _<$>_)
 
@@ -75,18 +75,26 @@ record Fusion (d : Desc I) (𝓢ᴬ : Semantics d 𝓥ᴬ 𝓒ᴬ) (𝓢ᴮ : Se
                 bᴬᴮ  = fmap d (𝓢ᴬᴮ.body ρᴬᴮ) b
            in ⟦ d ⟧ᴿ (Kripkeᴿ 𝓥ᴿ 𝓒ᴿ) bᴮ bᴬᴮ → 𝓡 σ ρᴬ ρᴮ ρᴬᴮ (`con b)
 
+  {-
   fusion : 𝓔ᴿ Γ Δ ρᴬ ρᴮ ρᴬᴮ → (t : Tm d s σ Γ) → 𝓡 σ ρᴬ ρᴮ ρᴬᴮ t
+  -}
 
+  {-
   body   : 𝓔ᴿ Γ Δ ρᴬ ρᴮ ρᴬᴮ → ∀ Δ σ → (b : Scope (Tm d s) Δ σ Γ) →
            let vᴮ   = 𝓢ᴮ.body ρᴮ Δ σ (quoteᴬ Δ σ (𝓢ᴬ.body ρᴬ Δ σ b))
                vᴬᴮ  = 𝓢ᴬᴮ.body ρᴬᴮ Δ σ b
            in Kripkeᴿ 𝓥ᴿ 𝓒ᴿ Δ σ vᴮ vᴬᴮ
+  -}
 
+  {- fails with a Size error
   fusion ρᴿ (`var v) = varᴿ ρᴿ v
   fusion ρᴿ (`con t) = algᴿ ρᴿ t (rew (liftᴿ d (body ρᴿ) t)) where
 
      eq  = fmap² d (𝓢ᴬ.body _) (λ Δ i t → 𝓢ᴮ.body _ Δ i (quoteᴬ Δ i t)) t
      rew = subst (λ v → ⟦ d ⟧ᴿ (Kripkeᴿ 𝓥ᴿ 𝓒ᴿ) v _) (sym eq)
+  -}
 
+  {-
   body ρᴿ []       i b = fusion ρᴿ b
   body ρᴿ (σ ∷ Δ)  i b = λ ρ vsᴿ → fusion (th^𝓔ᴿ ρᴿ ρ >>ᴿ vsᴿ) b
+  -}

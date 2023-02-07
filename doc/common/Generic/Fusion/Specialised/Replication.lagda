@@ -1,5 +1,5 @@
 \begin{code}
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 --------------------------------------------------------------------------------
 -- This module replicates (a generic version of) the result proven in
@@ -74,10 +74,11 @@ module _
              fmap {Y = Kripke 𝓥 𝓒} e f b ≡ fmap e g b
     zip-eq (`σ A d)   (a , b) (refl , zp) = cong (a ,_) (zip-eq (d a) b zp)
     zip-eq (`∎ eq)    refl    zp          = refl
-    zip-eq (`X Δ j d) (x , b) (rec  , zp) = cong₂ _,_ (kripke-eq Δ j x rec) (zip-eq d b zp) where
+    zip-eq (`X Δ j d) (x , b) (rec  , zp) = cong₂ _,_ (kripke-eq Δ j x rec) (zip-eq d b zp)
 
-
+  {-
   ren-sem : Fusion d Ren S S
             (λ Γ Δ σ → All Eqᴿ Γ ∘ (select σ)) Eqᴿ Eqᴿ
   ren-sem = FusProp.ren-sem d S alg-fusion
+  -}
 \end{code}

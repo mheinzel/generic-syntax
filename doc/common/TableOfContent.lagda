@@ -3,6 +3,8 @@
 -- This module precisely maps sections in the paper to Agda modules
 --------------------------------------------------------------------------------
 
+{-# OPTIONS --sized-types #-}
+
 module TableOfContent where
 
 --------------------------------------------------------------------------------

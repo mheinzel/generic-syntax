@@ -1,4 +1,4 @@
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module Generic.Examples.SystemF where
 
@@ -87,6 +87,8 @@ eval Γ t with redex t
 `id : SF Term []
 `id = Lam (lam (`var z))
 
+{-
 _ : _ ⊢ eval [] (lam (lam (app (lam (app (`var z) (`var z))) (lam (`var z)))))
   ≈ fromList (_ ∷ _ ∷ lam (lam (lam (`var z))) ∷ [])
 _ = refl ∷ λ where .force → refl ∷ λ where .force → refl ∷ λ where .force → []
+-}

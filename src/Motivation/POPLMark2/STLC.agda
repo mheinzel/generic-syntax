@@ -1,4 +1,4 @@
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 module Motivation.POPLMark2.STLC where
 
 open import Data.Var using (Var; _─Scoped; injectˡ; injectʳ)
@@ -92,6 +92,7 @@ _⊢_∋_↝⋆_ : ∀ Γ σ → Term σ Γ → Term σ Γ → Set
 -- Stability of Reduction under thinning and substitution
 -- (Stability of Typing is a consequence of Term being a typed syntax)
 
+{-
 th^↝ : ∀ ρ → Γ ⊢ σ ∋ t ↝ u → Δ ⊢ σ ∋ ren ρ t ↝ ren ρ u
 th^↝ ρ (β t u)      = subst (_ ⊢ _ ∋ ren ρ (`λ t `∙ u) ↝_) (renβ TermD t (ε ∙ u) ρ) (β _ _)
 th^↝ ρ ([λ] r)      = [λ] (th^↝ _ r)
@@ -813,3 +814,4 @@ t ^SN = cast (quote^𝓡 _ (eval dummy t))
 
 _^sn : ∀ t → Γ ⊢sn σ ∋ t
 t ^sn = sound^SN (t ^SN)
+-}

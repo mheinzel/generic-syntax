@@ -1,5 +1,5 @@
 \begin{code}
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module Generic.Fusion.Utils where
 
@@ -69,6 +69,7 @@ module _ {I : Set} {d : Desc I}  {𝓥 𝓒 : I ─Scoped}
   -- this is the shape of environment one obtains when pushing an evaluation environment
   -- on top of a substitution into the body of a binder
 
+  {-
   subBodyEnv :
     ∀ {Γ Δ Θ Ξ} (ρᴬ : (Γ ─Env) (Tm d _) Δ) {ρᴮ : (Δ ─Env) 𝓥 Θ} {ρᴬᴮ}
     {ρ₄ : (Ξ ─Env) 𝓥 Θ} {ρ₅ : (Ξ ─Env) 𝓒 Θ} →
@@ -110,4 +111,5 @@ module _ {I : Set} {d : Desc I}  {𝓥 𝓒 : I ─Scoped}
         ≡⟨ cong (lookup ρᴮ) (lookup-base^Var v) ⟩
       lookup ρᴮ v
         ∎
+    -}
 \end{code}

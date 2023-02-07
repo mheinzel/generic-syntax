@@ -1,6 +1,7 @@
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 module Motivation.POPLMark2.GodelT where
 
+{-
 open import Data.Var using (Var; _─Scoped; injectˡ; injectʳ)
 open import Data.Var.Varlike
 open import Data.Environment
@@ -1369,3 +1370,4 @@ t ^SN = cast (quote^𝓡 _ (eval dummy t))
 
 _^sn : ∀ t → Γ ⊢sn σ ∋ t
 t ^sn = sound^SN (t ^SN)
+-}

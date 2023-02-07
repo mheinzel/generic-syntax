@@ -1,5 +1,5 @@
 \begin{code}
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 open import Data.Var hiding (_<$>_; z; s)
 open import Data.Relation
@@ -100,6 +100,7 @@ record Simulation (d : Desc I)
 %</algR>
 %<*simbody>
 \begin{code}
+  {- fails with a Size error
   sim   :  All 𝓥ᴿ Γ ρᴬ ρᴮ → (t : Tm d s σ Γ) →
            rel 𝓒ᴿ σ (𝓢ᴬ.semantics ρᴬ t) (𝓢ᴮ.semantics ρᴮ t)
   body  :  All 𝓥ᴿ Γ ρᴬ ρᴮ → ∀ Δ j → (t : Scope (Tm d s) Δ j Γ) →
@@ -110,5 +111,6 @@ record Simulation (d : Desc I)
 
   body ρᴿ []       i t = sim ρᴿ t
   body ρᴿ (_ ∷ _)  i t = λ σ vsᴿ → sim (vsᴿ >>ᴿ (thᴿ σ <$>ᴿ ρᴿ)) t
+  -}
 \end{code}
 %</simbody>

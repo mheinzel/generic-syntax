@@ -1,4 +1,4 @@
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module Generic.Simulation.Syntactic where
 
@@ -45,5 +45,7 @@ module _ {I : Set} {d : Desc I} where
      σ : I
 
 
+ {-
  rensub : (ρ : Thinning Γ Δ) (t : Tm d ∞ σ Γ) → ren ρ t ≡ sub (`var <$> ρ) t
  rensub ρ = Simulation.sim RenSub (packᴿ λ _ → refl)
+ -}

@@ -1,5 +1,5 @@
 \begin{code}
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module Generic.Fusion.Syntactic where
 
@@ -32,6 +32,7 @@ module _ {I : Set} (d : Desc I) where
      σ : I
      i : Size
 
+ {-
  Ren² : Fusion d Ren Ren Ren (λ Γ Δ ρ₁ → All Eqᴿ Γ ∘ (select ρ₁)) Eqᴿ Eqᴿ
  Ren² = FusProp.ren-sem d Ren $ λ b ρᴿ zp →
    cong `con $ Relator.reifyᴿ Eqᴿ d (Simulation.reifyᴿ Eqᴿ Eqᴿ (vl^Refl vl^Var)) zp
@@ -69,15 +70,19 @@ module _ {I : Set} (d : Desc I) where
          ≡⟨ Relator.reifyᴿ VarTmᴿ d (Simulation.reifyᴿ VarTmᴿ Eqᴿ vl^VarTm) zipped ⟩
       fmap d (reify vl^Tm) v₃
    ∎
+ -}
 
 \end{code}
 %<*subren>
 \begin{code}
+ {-
  subren :  (t : Tm d i σ Γ) (ρ₁ : (Γ ─Env) (Tm d ∞) Δ) (ρ₂ : Thinning Δ Θ) →
            ren ρ₂ (sub ρ₁ t) ≡ sub (ren ρ₂ <$> ρ₁) t
+ -}
 \end{code}
 %</subren>
 \begin{code}
+ {-
  subren t ρ₁ ρ₂ = Fusion.fusion SubRen Relation.reflᴿ t
 
  Sub² : Fusion d Sub Sub Sub (λ Γ Δ ρ₁ ρ₂ → All Eqᴿ Γ (sub ρ₂ <$> ρ₁)) Eqᴿ Eqᴿ
@@ -101,15 +106,19 @@ module _ {I : Set} (d : Desc I) where
          ≡⟨ Relator.reifyᴿ Eqᴿ d (Simulation.reifyᴿ Eqᴿ Eqᴿ (vl^Refl vl^Tm)) zipped ⟩
       fmap d (reify vl^Tm) v₃
    ∎
+ -}
 
 \end{code}
 %<*subsub>
 \begin{code}
+ {-
  sub² :  (t : Tm d i σ Γ) (ρ₁ : (Γ ─Env) (Tm d ∞) Δ) (ρ₂ : (Δ ─Env) (Tm d ∞) Θ) →
          sub ρ₂ (sub ρ₁ t) ≡ sub (sub ρ₂ <$> ρ₁) t
+ -}
 \end{code}
 %</subsub>
 \begin{code}
+ {-
  sub² t ρ₁ ρ₂ = Fusion.fusion Sub² Relation.reflᴿ t
 
  ren-sub-fusionᴿ : ∀ {Δ Γ Θ} (σ : (Δ ─Env) (Tm d ∞) Γ) (ρ : Thinning Γ Θ) →
@@ -189,4 +198,5 @@ module _ {I : Set} (d : Desc I) where
      ≡⟨ sym (sub² b (base vl^Tm <+> σ) ρ) ⟩
    sub ρ (sub (base vl^Tm <+> σ) b)
      ∎
+ -}
 \end{code}

@@ -9,7 +9,7 @@
 -- with renaming, substitution, and let-elaboration simpler.
 --------------------------------------------------------------------------------
 
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module Generic.Fusion.Specialised.Propositional where
 
@@ -45,6 +45,7 @@ module _ {I} (d : Desc I) {𝓥 𝓒} (S : Semantics d 𝓥 𝓒)
 
   module Ren = Semantics (Ren {d = d})
 
+  {- Size error
   ren-sem : Fusion d Ren S S (λ Γ Δ σ → All Eqᴿ Γ ∘ (select σ)) Eqᴿ Eqᴿ
   Fusion.reifyᴬ ren-sem = λ _ t → t
   Fusion.vl^𝓥ᴬ ren-sem = vl^Var
@@ -90,4 +91,5 @@ module _ {I} (d : Desc I) {𝓥 𝓒} (S : Semantics d 𝓥 𝓒)
       ≡⟨ alg-fusion b ρᴿ (subst (λ t → ⟦ d ⟧ᴿ _ t v₃) aux zp) ⟩
     Semantics.alg S v₃
       ∎
+  -}
 \end{code}

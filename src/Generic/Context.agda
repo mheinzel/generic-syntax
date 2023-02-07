@@ -1,3 +1,5 @@
+{-# OPTIONS --sized-types #-}
+
 module Generic.Context where
 
 open import Size

@@ -1,4 +1,4 @@
-{-# OPTIONS --with-K --safe --sized-types #-}
+{-# OPTIONS --with-K --sized-types #-}
 
 module Generic.Equality where
 

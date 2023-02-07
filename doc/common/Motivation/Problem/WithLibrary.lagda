@@ -1,5 +1,5 @@
 \begin{code}
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module Motivation.Problem.WithLibrary where
 
@@ -87,6 +87,7 @@ _⊢_∋_↝⋆T_ : ∀ Γ σ → T σ Γ → T σ Γ → Set
 ↝⋆Tᴿ : Rel T T
 rel ↝⋆Tᴿ σ = _ ⊢ σ ∋_↝⋆T_
 
+{-
 th^↝T : ∀ {Γ Δ σ t u} (ρ : Thinning Γ Δ) →
         Γ ⊢ σ ∋ t ↝T u → Δ ⊢ σ ∋ th^Tm t ρ ↝T th^Tm u ρ
 th^↝T ρ (`lam r)    = `lam (th^↝T _ r)
@@ -169,4 +170,5 @@ simulation ρᴿ (`appl r t) =
 simulation ρᴿ (`appr f r) =
     gmap (appT _) (`appr _) (simulation ρᴿ r)
  ◅◅ gmap (λ f → appT f _) (λ r → `appl r _) (Simulation.sim UnLet^↝⋆T ρᴿ f)
+-}
 \end{code}

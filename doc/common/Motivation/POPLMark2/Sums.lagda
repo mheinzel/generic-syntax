@@ -1,5 +1,5 @@
 \begin{code}
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 module Motivation.POPLMark2.Sums where
 
 open import Data.Var using (Var; _─Scoped; injectˡ; injectʳ)
@@ -115,6 +115,7 @@ _⊢_∋_↝⋆_ : ∀ Γ σ → Term σ Γ → Term σ Γ → Set
 -- Stability of Reduction under thinning and substitution
 -- (Stability of Typing is a consequence of Term being a typed syntax)
 
+{-
 th^↝ : ∀ ρ → Γ ⊢ σ ∋ t ↝ u → Δ ⊢ σ ∋ ren ρ t ↝ ren ρ u
 th^↝ ρ (β t u)      = subst (_ ⊢ _ ∋ ren ρ (`λ t `∙ u) ↝_) (renβ TermD t (ε ∙ u) ρ) (β _ _)
 th^↝ ρ (ι₁ t l r)   = subst (_ ⊢ _ ∋ ren ρ (`case (`i₁ t) l r) ↝_) (renβ TermD l (ε ∙ t) ρ) (ι₁ _ _ _)
@@ -144,6 +145,7 @@ sub^↝ ρ ([c]₃ t l c) = [c]₃ (sub ρ t) (sub _ l) (sub^↝ _ c)
 
 [/0]^↝ : ∀ {σ τ Γ b b′} → (σ ∷ Γ) ⊢ τ ∋ b ↝ b′ → ∀ u → Γ ⊢ τ ∋ b [ u /0] ↝ b′ [ u /0]
 [/0]^↝ r u = sub^↝ (u /0]) r
+-}
 
 -- Lemma 1.4
 ↝⋆ᴿ : Rel Term Term
@@ -152,6 +154,7 @@ rel ↝⋆ᴿ = _ ⊢_∋_↝⋆_
 [v↦t↝⋆t] : {ρ : (Γ ─Env) Term Δ} → R.All ↝⋆ᴿ Γ ρ ρ
 lookupᴿ [v↦t↝⋆t] k = S.ε
 
+{-
 -- 1., 2., 3., 4.: cf. Star's gmap
 -- 5.
 sub^↝⋆ : ∀ t → R.All ↝⋆ᴿ Γ ρ ρ′ → Δ ⊢ σ ∋ sub ρ t ↝⋆ sub ρ′ t
@@ -173,6 +176,7 @@ sub^↝⋆ t ρᴿ = Simulation.sim sim ρᴿ t where
 
 [/0]^↝⋆ : ∀ {σ τ Γ} t {u u′} → Γ ⊢ σ ∋ u ↝ u′ → Γ ⊢ τ ∋ t [ u /0] ↝⋆ t [ u′ /0]
 [/0]^↝⋆ t r = sub^↝⋆ t ([v↦t↝⋆t] ∙ᴿ S.return r)
+-}
 
 -- Inversion lemmas for the interaction between ren, ∙, λ and ↝
 
@@ -185,6 +189,7 @@ th⁻¹^`λ : ∀ (u : Term (σ ⇒ τ) Γ) {b : Term τ (σ ∷ Δ)} ρ → `λ
 th⁻¹^`λ (`λ b′)        ρ refl = b′ , refl , refl
 
 
+{-
 th⁻¹^↝ : ∀ t ρ → Δ ⊢ σ ∋ ren ρ t ↝ u′ →
          ∃ λ u → u′ ≡ ren ρ u × Γ ⊢ σ ∋ t ↝ u
 -- redex
@@ -220,6 +225,7 @@ th⁻¹^↝⋆ t ρ rs = go t ρ refl rs where
     let (u , eq , r′)   = th⁻¹^↝ t ρ r in
     let (v , eq′ , rs′) = go u ρ eq rs in
     v , eq′ , r′ Star.◅ rs′
+-}
 
 -- Section 4 Defining Strongly Normalizing Terms
 -------------------------------------------------------------------
@@ -251,6 +257,7 @@ Closed-sn (sn t^SN) = t^SN
 Closed⋆-sn : Γ ⊢sn σ ∋ t → Closed (Γ ⊢ σ ∋_↝⋆_) (Γ ⊢sn σ ∋_) t
 Closed⋆-sn = Closed⇒Closed⋆ Closed-sn
 
+{-
 -- Lemma 4.2 Weakening of strongly normalizing terms
 th^sn : ∀ ρ → Γ ⊢sn σ ∋ t → Δ ⊢sn σ ∋ ren ρ t
 th^sn ρ (sn t^SN) = sn $ λ r →
@@ -269,6 +276,7 @@ sub⁻¹^sn t ρ (sn tρ^sn) = sn (λ r → sub⁻¹^sn _ ρ (tρ^sn (sub^↝ ρ
 
 [/0]⁻¹^sn : ∀ t u → Γ ⊢sn τ ∋ (t [ u /0]) → (σ ∷ Γ) ⊢sn τ ∋ t
 [/0]⁻¹^sn t u t[u]^sn = sub⁻¹^sn t (u /0]) t[u]^sn
+-}
 
 -- 2.
 `λ^sn : (σ ∷ Γ) ⊢sn τ ∋ t → Γ ⊢sn σ ⇒ τ ∋ `λ t
@@ -494,6 +502,7 @@ fire (β b u)    = β b u
 fire (ι₁ t l r) = ι₁ t l r
 fire (ι₂ t l r) = ι₂ t l r
 
+{-
 -- Closure under fire-expansion
 c[fire]⁻¹^Closed-sn : ∀ {c} r → Γ ⊢↯sn ⊡ ∋ r → Γ ∣ ⊡ ⊢sn σ ∋ c →
   Γ ⊢sn σ ∋ cut (βιRed r) c → Closed (Γ ⊢ σ ∋_↝_) (Γ ⊢sn σ ∋_) (cut (unRed r) c)
@@ -543,6 +552,7 @@ c[fire⁻¹]^Closed-sn c (ι₂ t l r) (t^sn , l^sn , sn r^sn) c^sn c[r]^sn ([c]
 c[fire⁻¹]^sn : ∀ {c} r → Γ ⊢↯sn ⊡ ∋ r → Γ ∣ ⊡ ⊢sn σ ∋ c →
                Γ ⊢sn σ ∋ cut (βιRed r) c → Γ ⊢sn σ ∋ cut (unRed r) c
 c[fire⁻¹]^sn r r^sn c^sn c[r]^sn = sn (c[fire]⁻¹^Closed-sn r r^sn c^sn c[r]^sn)
+-}
 
 -- Section 3.2 Inductive Definition of Strongly Normalizing Terms
 -- TODO: refactor computational part as: Γ ⊢↯ τ + R-constraints?
@@ -608,6 +618,7 @@ cut⁻¹^SNe (cas t^SNe l^SN r^SN) =
   in _ , v , cong (λ t → `case t _ _) eq , cas c^SN l^SN r^SN
 
 -- Lemma 4.11 Thinning
+{-
 mutual
 
  -- 1.
@@ -749,6 +760,7 @@ mutual
  sound^↝SN (ι₂ t l r t^SN l^SN) = ι₂ t l r (sound^SN t^SN) (sound^SN l^SN)
  sound^↝SN ([∙]₂ r t)           = [∙]₂ (sound^↝SN r) t
  sound^↝SN ([c]₁ r _ _)         = [c]₁ (sound^↝SN r) _ _
+-}
 
 -- Section 4.4 Soundness and Completeness
 
@@ -881,6 +893,7 @@ quote^+𝓡  : Quote Γ σ → Quote Γ τ →
 quote^+𝓡 σ^𝓡 τ^𝓡 (inl t^𝓡) = inl (σ^𝓡 t^𝓡)
 quote^+𝓡 σ^𝓡 τ^𝓡 (inr t^𝓡) = inr (τ^𝓡 t^𝓡)
 
+{-
 mutual
 
  -- 1.
@@ -1093,4 +1106,5 @@ t ^SN = cast (quote^𝓡 _ (eval dummy t))
 
 _^sn : ∀ t → Γ ⊢sn σ ∋ t
 t ^sn = sound^SN (t ^SN)
+-}
 \end{code}

@@ -1,3 +1,5 @@
+{-# OPTIONS --sized-types #-}
+
 module Generic.Closure where
 
 open import Size

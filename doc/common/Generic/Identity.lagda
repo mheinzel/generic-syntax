@@ -1,5 +1,5 @@
 \begin{code}
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module Generic.Identity where
 
@@ -41,6 +41,7 @@ data _≅_ {d = d} {σ} {Γ} where
 
 ⟨ e ⟩ b ≅ c = ⟦ e ⟧ᴿ (λ _ _  t u → t ≅ u) b c
 
+{- Size error
 ≅⇒≡    : ∀ {t u : Tm d ∞ σ Γ} → t ≅ u → t ≡ u
 ⟨_⟩≅⇒≡ : ∀ e {t u : ⟦ e ⟧ (Scope (Tm d ∞)) σ Γ} → ⟨ e ⟩ t ≅ u → t ≡ u
 
@@ -50,7 +51,9 @@ data _≅_ {d = d} {σ} {Γ} where
 ⟨ `σ A d   ⟩≅⇒≡ (refl , eq) = cong -,_ (⟨ d _ ⟩≅⇒≡ eq)
 ⟨ `X Δ j d ⟩≅⇒≡ (≅-pr , eq) = cong₂ _,_ (≅⇒≡ ≅-pr) (⟨ d ⟩≅⇒≡ eq)
 ⟨ `∎ i     ⟩≅⇒≡ eq          = ≡-irrelevant _ _
+-}
 
+{-
 module RenId {I : Set} {d : Desc I} where
 
  ren-id      : ∀ (t : Tm d i σ Γ) {ρ} → R.All Eqᴿ Γ ρ (base vl^Var) → ren ρ t ≅ t
@@ -85,6 +88,7 @@ module _ {I : Set} {d : Desc I} where
   ren-id′ : ∀ {σ Γ} (t : Tm d ∞ σ Γ) → ren (pack id) t ≡ t
   ren-id′ t = ≅⇒≡ (RenId.ren-id t (packᴿ λ v → sym (lookup-base^Var v)))
 
+  {-
   sub-id : ∀ {σ Γ} (t : Tm d ∞ σ Γ) → sub (base vl^Tm) t ≡ t
   sub-id t = begin
     sub (base vl^Tm) t  ≡⟨ sym $ Simulation.sim RenSub base^VarTmᴿ t ⟩
@@ -96,6 +100,7 @@ module _ {I : Set} {d : Desc I} where
     sub (pack `var) t ≡⟨ sym $ Simulation.sim RenSub (packᴿ λ v → refl) t ⟩
     ren (pack id)   t ≡⟨ ren-id′ t ⟩
     t                 ∎
+  -}
 
   lift[]^Tm : ∀ {Γ Δ} (ρ : (Γ ─Env) (Tm d ∞) Δ) → R.All Eqᴿ Γ ρ (lift vl^Tm [] ρ)
   lookupᴿ (lift[]^Tm ρ) k = sym (ren-id (lookup ρ k))
@@ -114,4 +119,5 @@ module _ {I : Set} {d : Desc I} where
                                       ((σ ∷ Γ ─Env) (Tm d ∞) (σ ∷ Γ) ∋ pack `var)
   lookupᴿ th^base^s∙z z     = refl
   lookupᴿ th^base^s∙z (s k) = cong (ren (pack s)) (lookup-base^Tm k)
+-}
 \end{code}

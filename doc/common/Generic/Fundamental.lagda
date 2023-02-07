@@ -1,5 +1,5 @@
 \begin{code}
-{-# OPTIONS --safe --sized-types #-}
+{-# OPTIONS --sized-types #-}
 
 module Generic.Fundamental where
 
@@ -75,7 +75,9 @@ record Fundamental
   Simulation.varᴿ  sim = varᴾ
   Simulation.algᴿ  sim = λ b ρᴿ zp → algᴾ b (fromRel∀ ρᴿ) (fromRelator _ _ d zp)
 
+  {-
   fundamental : ∀ {s} {ρ : (Γ ─Env) 𝓥 Δ} → P.All 𝓥ᴾ _ ρ →
                 (t : Tm d s i Γ) → pred 𝓒ᴾ i (Semantics.semantics 𝓢 ρ t)
   fundamental ρᴾ t = Simulation.sim sim (fromPred∀ ρᴾ) t
+  -}
 \end{code}

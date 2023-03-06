@@ -1,3 +1,4 @@
+{-# OPTIONS --allow-unsolved-metas #-}
 {-# OPTIONS --sized-types #-}
 
 open import Data.Var hiding (_<$>_; z; s)
@@ -15,6 +16,7 @@ open import Relation.Unary
 open import Data.Var.Varlike
 open import Data.Environment
 open import Generic.Syntax
+
 open import Generic.Semantics
 open import Generic.Relator as Relator using (⟦_⟧ᴿ; liftᴿ)
 
@@ -76,15 +78,13 @@ record Simulation (d : Desc I)
                  vᴮ = fmap d (𝓢ᴮ.body ρᴮ) b
             in bodyᴿ vᴬ vᴮ → rel 𝓒ᴿ σ (𝓢ᴬ.alg vᴬ) (𝓢ᴮ.alg vᴮ)
 
-  {- fails with a Size error
   sim   :  All 𝓥ᴿ Γ ρᴬ ρᴮ → (t : Tm d s σ Γ) →
            rel 𝓒ᴿ σ (𝓢ᴬ.semantics ρᴬ t) (𝓢ᴮ.semantics ρᴮ t)
   body  :  All 𝓥ᴿ Γ ρᴬ ρᴮ → ∀ Δ j → (t : Scope (Tm d s) Δ j Γ) →
            Kripkeᴿ 𝓥ᴿ 𝓒ᴿ Δ j (𝓢ᴬ.body ρᴬ Δ j t) (𝓢ᴮ.body ρᴮ Δ j t)
 
   sim ρᴿ (`var k) = varᴿ (lookupᴿ ρᴿ k)
-  sim ρᴿ (`con t) = algᴿ t ρᴿ (liftᴿ d (body ρᴿ) t)
+  sim ρᴿ (`con t) = {! algᴿ t ρᴿ (liftᴿ d (body ρᴿ) t) !}
 
   body ρᴿ []       i t = sim ρᴿ t
   body ρᴿ (_ ∷ _)  i t = λ σ vsᴿ → sim (vsᴿ >>ᴿ (thᴿ σ <$>ᴿ ρᴿ)) t
-  -}
